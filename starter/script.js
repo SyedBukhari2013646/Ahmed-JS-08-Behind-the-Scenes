@@ -121,23 +121,123 @@
 
 // var firstName = 'Aqsa';
 
-const ahmed = {
-  firstName: 'Ahmed',
-  year: 2002,
-  calcAge: function () {
-    console.log(this);
-    console.log(2037 - this.year);
-  },
+// const ahmed = {
+//   firstName: 'Ahmed',
+//   year: 1991,
 
-  greet: () => {
-    console.log(this);
-    console.log(`Hey ${this.firstName}`);
-  },
+//   calcAge: function () {
+//     console.log(2037 - this.year);
 
-  greet: function () {
-    console.log(this);
-    console.log(`Hey ${this.firstName}`);
-  },
+// //Solution 1
+// const self = this;
+// const isMellenial = function () {
+//   console.log(self);
+//   console.log(self.year >= 1980 && self.year <= 1996);
+
+//   console.log(this.year >= 1980 && this.year <= 1996);
+// };
+
+//Solution 2
+//     const isMellenial = () => {
+//       console.log(this);
+//       console.log(this.year >= 1980 && this.year <= 1996);
+//     };
+//     isMellenial();
+//   },
+
+//   greet: () => {
+//     console.log(this);
+//     console.log(`Hey ${this.firstName}`);
+//   },
+
+//   greet: function () {
+//     console.log(this);
+//     console.log(`Hey ${this.firstName}`);
+//   },
+// };
+
+// ahmed.greet();
+// ahmed.calcAge();
+
+// // Arguments Keyword
+
+// const addExp = function (a, b) {
+//   console.log(arguments);
+//   return a + b;
+// };
+
+// addExp(2, 3, 5, 3);
+
+// // Args for Arrow Keyword
+// var addArrow = (a, b) => {
+//   console.log(arguments);
+//   a + b;
+// };
+
+// addArrow(2, 3);
+
+//////////////////////////////////////
+//Objective refrence in practice (deep VS shallow choices)
+
+const kubra1 = {
+  firstName: 'Kubra',
+  lastName: 'bibi',
+  age: 19,
 };
 
-ahmed.greet();
+function shadishudaInsaan(newKubra, newLastName) {
+  newKubra.lastName = newLastName;
+  return newKubra;
+}
+
+const kubraMarried = shadishudaInsaan(kubra1, 'Ahmed');
+
+// const kubraMarried = kubra1;
+// kubraMarried.lastName = 'ahmed';
+
+// const kubra2 = {
+//   firstName: 'Kubra',
+//   lastName: 'Baby❤️‍🔥',
+//   age: 19,
+//   family: ['akshay', 'shahrukh'],
+// };
+
+// // shallow clone just the first layer
+
+// const kubraCopy = { ...kubra2 };
+// kubraCopy.lastName = 'Ahmed';
+
+// // console.log('Before: ', kubra2);
+// // console.log('After: ', kubraCopy);
+
+// // kubraCopy.family.push('Huzaifa');
+// // kubraCopy.family.push('Abdullah');
+
+// // Deep cloning/copying to change in all the layers / nested layers
+
+// const kubraClone = structuredClone(kubra2);
+// kubraCopy.family.push('Huzaifa');
+// kubraCopy.family.push('Abdullah');
+// console.log(kubra2);
+// console.log(kubraClone);
+
+const kubra2 = {
+  firstName: 'Kubra',
+  lastName: 'Baby❤️‍🔥',
+  age: 19,
+  family: ['akshay', 'shahrukh'],
+};
+
+// First create a shallow copy
+const kubraCopy = { ...kubra2 };
+kubraCopy.lastName = 'Ahmed';
+
+// Then create a deep clone
+const kubraClone = structuredClone(kubra2);
+
+// Now modify the family in the deep clone
+kubraClone.family.push('Huzaifa');
+kubraClone.family.push('Abdullah');
+
+console.log('Original:', kubra2); // Will show 2 family members
+console.log('Deep Clone:', kubraClone); // Will show 4 family members
